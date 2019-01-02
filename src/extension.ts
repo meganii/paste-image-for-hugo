@@ -5,6 +5,13 @@ import * as path from 'path';
 import * as moment from 'moment';
 import { spawn } from 'child_process';
 
+const cloudinary = require('cloudinary');
+cloudinary.config({
+	cloud_name: process.env.CLOUDINARY_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
 class Logger {
     static channel: vscode.OutputChannel;
 
@@ -49,6 +56,24 @@ export function activate(context: vscode.ExtensionContext) {
 
 			ascript.stdout.on('data', (data) => {
 				Logger.showInformationMessage(`stdout: ${data}`);
+				cloudinary.v2.uploader.upload(data.toString().trim(), (error: Error, result: any) => {
+                    if (error) {
+                        console.error(error);
+					}
+					let editor: vscode.TextEditor;
+					if (vscode.window.activeTextEditor) {
+						editor = vscode.window.activeTextEditor;
+						console.log(result);
+						editor.edit(edit => {
+						let current = editor.selection;	
+							if (current.isEmpty) {
+								edit.insert(current.start, result.secure_url);
+							} else {
+								edit.replace(current, result.secure_url);
+							}
+						});
+					}
+				});
 			});
 			  
 			ascript.stderr.on('data', (data) => {

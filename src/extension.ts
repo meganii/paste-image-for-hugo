@@ -70,9 +70,9 @@ export function activate(context: vscode.ExtensionContext) {
 					editor.edit(edit => {
 					let current = (editor as vscode.TextEditor).selection;
 						if (current.isEmpty) {
-							edit.insert(current.start, result.secure_url);
+							edit.insert(current.start, getHugoImgTag(result));
 						} else {
-							edit.replace(current, result.secure_url);
+							edit.replace(current, getHugoImgTag(result));
 						}
 					});
 				});
@@ -98,4 +98,8 @@ export function deactivate() {}
 
 function getImagePath () {
 	return `${moment().format('Y-MM-DD-HH-mm-ss')}.png`;
+}
+
+function getHugoImgTag (result: any) {
+	return `{{% img src="${result.secure_url}" w="${result.width}" h="${result.height}" %}}`;
 }

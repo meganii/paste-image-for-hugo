@@ -1,7 +1,7 @@
 {
-	"name": "paste",
-	"displayName": "paste",
-	"description": "paste",
+	"name": "paste-image",
+	"displayName": "Paste image",
+	"description": "Paste image from Clipboard",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.30.0"
@@ -10,14 +10,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.pasteImage"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "extension.pasteImage",
+				"title": "Paste Image"
 			}
 		]
 	},

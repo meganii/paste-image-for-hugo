@@ -33,6 +33,11 @@
 						"type": "string",
 						"default": "",
 						"description": "Cloudinary API Secret"
+					},
+					"pasteImage4Hugo.imgStoreDir": {
+						"type": "string",
+						"default": "static/images",
+						"description": "where to store image file"
 					}
 				}
 			}

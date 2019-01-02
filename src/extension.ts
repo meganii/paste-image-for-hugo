@@ -52,7 +52,25 @@ export function activate(context: vscode.ExtensionContext) {
 		try {
 			const scriptPath = path.join(__dirname, '../script/mac.applescript');
 			Logger.showInformationMessage(scriptPath);
-			let ascript = spawn('osascript', [scriptPath, `/Users/meganii/src/github.com/meganii/vscode-test-extension/paste/${getImagePath()}`]);
+
+			let editor = vscode.window.activeTextEditor;
+			if (!editor) { return; }
+
+			let fileUri = editor.document.uri;
+			if (!fileUri) { return; }
+			if (fileUri.scheme === 'untitled') {
+				Logger.showInformationMessage('Before paste image, you need to save current edit file first.');
+				return;
+			}
+
+			let filePath = fileUri.fsPath;
+			let folderPath = path.dirname(filePath);
+			let projectPath = vscode.workspace.rootPath;
+			if (!projectPath) { return; }
+			Logger.showInformationMessage(`FolderPath: ${folderPath}`);
+			Logger.showInformationMessage(`ProjectPath: ${projectPath}`);
+
+			let ascript = spawn('osascript', [scriptPath, `${projectPath}/${getImagePath()}`]);
 
 			ascript.stdout.on('data', (data) => {
 				Logger.showInformationMessage(`stdout: ${data}`);

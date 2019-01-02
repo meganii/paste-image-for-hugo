@@ -46,7 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', async () => {
+	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
 		// The code you place here will be executed every time your command is executed
 
 		try {
@@ -57,22 +57,24 @@ export function activate(context: vscode.ExtensionContext) {
 			ascript.stdout.on('data', (data) => {
 				Logger.showInformationMessage(`stdout: ${data}`);
 				cloudinary.v2.uploader.upload(data.toString().trim(), (error: Error, result: any) => {
-                    if (error) {
-                        console.error(error);
+                    if (error) { 
+						Logger.showErrorMessage(error.message);
+						return;
 					}
-					let editor: vscode.TextEditor;
-					if (vscode.window.activeTextEditor) {
-						editor = vscode.window.activeTextEditor;
-						console.log(result);
-						editor.edit(edit => {
-						let current = editor.selection;	
-							if (current.isEmpty) {
-								edit.insert(current.start, result.secure_url);
-							} else {
-								edit.replace(current, result.secure_url);
-							}
-						});
+					let editor = vscode.window.activeTextEditor;
+					if (!editor) {
+						Logger.showInformationMessage('no editor');
+						return ;
 					}
+
+					editor.edit(edit => {
+					let current = (editor as vscode.TextEditor).selection;
+						if (current.isEmpty) {
+							edit.insert(current.start, result.secure_url);
+						} else {
+							edit.replace(current, result.secure_url);
+						}
+					});
 				});
 			});
 			  

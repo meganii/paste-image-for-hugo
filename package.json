@@ -1,6 +1,6 @@
 {
-	"name": "paste-image",
-	"displayName": "Paste image",
+	"name": "paste-image-for-hugo",
+	"displayName": "Paste image for Hugo",
 	"description": "Paste image from Clipboard",
 	"version": "0.0.1",
 	"engines": {
@@ -10,14 +10,37 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.pasteImage"
+		"onCommand:extension.pasteImage4Hugo"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": [
+			{
+				"type": "object",
+				"title": "Configuration for pasteImage4Hugo",
+				"properties": {
+					"pasteImage4Hugo.cloudinaryName": {
+						"type": "string",
+						"default": "",
+						"description": "Cloudinary cloud_name"
+					},
+					"pasteImage4Hugo.cloudinaryAPIKey": {
+						"type": "string",
+						"default": "",
+						"description": "Cloudinary API KEY"
+					},
+					"pasteImage4Hugo.cloudinaryAPISecret": {
+						"type": "string",
+						"default": "",
+						"description": "Cloudinary API Secret"
+					}
+				}
+			}
+		],
 		"commands": [
 			{
-				"command": "extension.pasteImage",
-				"title": "Paste Image"
+				"command": "extension.pasteImage4Hugo",
+				"title": "PasteImage4Hugo"
 			}
 		]
 	},

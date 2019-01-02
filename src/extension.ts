@@ -7,9 +7,9 @@ import { spawn } from 'child_process';
 
 const cloudinary = require('cloudinary');
 cloudinary.config({
-	cloud_name: process.env.CLOUDINARY_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET
+	cloud_name: vscode.workspace.getConfiguration().get('pasteImage4Hugo.cloudinaryName'),
+	api_key: vscode.workspace.getConfiguration().get('pasteImage4Hugo.cloudinaryAPIKey'),
+	api_secret: vscode.workspace.getConfiguration().get('pasteImage4Hugo.cloudinaryAPISecret')
 });
 
 class Logger {
@@ -36,7 +36,7 @@ class Logger {
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	Logger.channel = vscode.window.createOutputChannel("pasteImage");
+	Logger.channel = vscode.window.createOutputChannel("pasteImage4Hugo");
 	context.subscriptions.push(Logger.channel);
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -46,7 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.pasteImage', () => {
+	let disposable = vscode.commands.registerCommand('extension.pasteImage4Hugo', () => {
 		// The code you place here will be executed every time your command is executed
 
 		try {

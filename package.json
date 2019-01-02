@@ -36,6 +36,7 @@
 		"vscode": "^1.1.25"
 	},
 	"dependencies": {
-		"moment": "^2.23.0"
+		"moment": "^2.23.0",
+		"node-ipc": "^9.1.1"
 	}
 }

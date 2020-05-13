@@ -3,7 +3,7 @@
 	"displayName": "Paste image for Hugo",
 	"publisher": "meganii",
 	"description": "Paste image from Clipboard",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.30.0"
 	},
@@ -58,15 +58,15 @@
 		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
-		"@types/mocha": "^2.2.42",
-		"@types/node": "^8.10.25",
-		"tslint": "^5.8.0",
-		"typescript": "^3.1.4",
-		"vscode": "^1.1.25"
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^14.0.1",
+		"tslint": "^6.1.2",
+		"typescript": "^3.9.2",
+		"vscode": "^1.1.37"
 	},
 	"dependencies": {
-		"cloudinary": "^1.13.2",
-		"moment": "^2.23.0",
+		"cloudinary": "^1.21.0",
+		"moment": "^2.25.3",
 		"node-ipc": "^9.1.1"
 	}
 }

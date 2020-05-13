@@ -1,6 +1,7 @@
 {
 	"name": "paste-image-for-hugo",
 	"displayName": "Paste image for Hugo",
+	"publisher": "meganii",
 	"description": "Paste image from Clipboard",
 	"version": "0.0.1",
 	"engines": {
